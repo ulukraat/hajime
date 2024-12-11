@@ -17,3 +17,30 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType<Test> {
+    systemProperty("file.encoding", "UTF-8")
+}
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType<ProcessResources> {
+    doLast {
+        filesMatching("**/*.properties") {
+            filter { line -> line.toString().replace("charset=ISO-8859-1", "charset=UTF-8") }
+        }
+    }
+}
+
+
+
+
